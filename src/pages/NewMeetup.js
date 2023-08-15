@@ -1,6 +1,9 @@
+import { useHistory } from 'react-router-dom'
+
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 
 function NewMeetupPage() {
+	const history = useHistory();
 
 	function addMeetupHandler(meetupData) {
 		fetch(
@@ -14,7 +17,11 @@ function NewMeetupPage() {
 					'Access-Control-Allow-Origin': 'origin'
 				}
 			}
-		);
+		).then(() => {
+			history.replace('/')
+		}).catch(() => {
+			window.alert('Error')
+		});
 	}
 
 	return (
